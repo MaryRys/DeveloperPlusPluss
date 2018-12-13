@@ -1,38 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
+
+import connection from '../helpers/data/connection';
+
+// import Auth from '../components/Auth/Auth';
+// import authRequests from '../helpers/data/authRequests';
 
 class App extends Component {
+  componentDidMount() {
+    connection();
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-            <button className='btn btn-danger'>HELP ME</button>
-            <Button
-              tag="a"
-              color="success"
-              size="large"
-              href="http://reactstrap.github.io"
-              target="_blank"
-          >
-              View Reactstrap Docs
-          </Button>
-
-          </a>
-        </header>
       </div>
     );
   }
