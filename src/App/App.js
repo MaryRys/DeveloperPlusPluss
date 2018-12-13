@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
 
 class App extends Component {
   render() {
@@ -18,6 +20,17 @@ class App extends Component {
             rel="noopener noreferrer"
           >
             Learn React
+            <button className='btn btn-danger'>HELP ME</button>
+            <Button
+              tag="a"
+              color="success"
+              size="large"
+              href="http://reactstrap.github.io"
+              target="_blank"
+          >
+              View Reactstrap Docs
+          </Button>
+
           </a>
         </header>
       </div>
