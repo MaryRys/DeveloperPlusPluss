@@ -7,6 +7,9 @@ const authenticate = () => {
   // console.log(x.i.additionalUserInfo.username);
 };
 
+const logoutUser = () => firebase.auth().signOut();
+
 export default {
   authenticate,
+  logoutUser,
 };
