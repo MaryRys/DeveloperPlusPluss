@@ -9,7 +9,7 @@ import Tutorials from '../components/Tutorials/Tutorials';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 
 import './App.scss';
-// import authRequests from '../helpers/data/authRequests';
+import authRequests from '../helpers/data/authRequests';
 
 class App extends Component {
   state = {
@@ -47,10 +47,15 @@ class App extends Component {
   // };
 
   render() {
+    const logoutClickEvent = () => {
+      authRequests.logoutUser();
+      this.setState({ authed: false });
+    };
+
     if (!this.state.authed) {
       return (
           <div className="App">
-          <MyNavbar />
+          <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
           <Auth isAuthenticated={this.isAuthenticated}/>
           </div>
       );
@@ -58,7 +63,7 @@ class App extends Component {
 
     return (
       <div className="App">
-      <MyNavbar />
+      <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
       <Tutorials />
       </div>
     );
