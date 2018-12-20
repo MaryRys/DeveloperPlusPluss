@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
 import Tutorials from '../components/Tutorials/Tutorials';
+import MyNavbar from '../components/MyNavbar/MyNavbar';
 
 import './App.scss';
 // import authRequests from '../helpers/data/authRequests';
@@ -49,6 +50,7 @@ class App extends Component {
     if (!this.state.authed) {
       return (
           <div className="App">
+          <MyNavbar />
           <Auth isAuthenticated={this.isAuthenticated}/>
           </div>
       );
@@ -56,6 +58,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      <MyNavbar />
       <Tutorials />
       </div>
     );
