@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,35 +21,31 @@ class App extends Component {
   componentDidMount() {
     connection();
 
-  //   this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       this.setState({
-  //         authed: true,
-  //       });
-  //     } else {
-  //       this.setState({
-  //         authed: false,
-  //       });
-  //     }
-  //   });
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authed: true,
+        });
+      } else {
+        this.setState({
+          authed: false,
+        });
+      }
+    });
   }
 
-  // componentWillUnmount() {
-  //   this.removeListener();
-  // }
+  componentWillUnmount() {
+    this.removeListener();
+  }
 
   isAuthenticated = (username) => {
     this.setState({ authed: true, github_username: username });
   };
 
-  // const logoutClickEvent = () {
-  //   this.setState({ authed: true, github_username: '' });
-  // };
-
   render() {
     const logoutClickEvent = () => {
       authRequests.logoutUser();
-      this.setState({ authed: false });
+      this.setState({ authed: false, github_username: '' });
     };
 
     if (!this.state.authed) {
