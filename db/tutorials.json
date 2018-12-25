@@ -1,22 +1,27 @@
 {
   "tutorial1": {
-    "title": "Wes Bos - Javascript 30",
-    "url": "http://javascript30.com"
+    "title": "Wes Bos 1 - Javascript 30",
+    "url": "http://javascript30.com",
+    "uid": "HXWvrXfelNYrdCJepY9dJIj3SOH3"
   },
   "tutorial2": {
-    "title": "Wes Bos - Javascript 30",
-    "url": "http://javascript30.com"
+    "title": "Wes Bos 2 - Javascript 30",
+    "url": "http://javascript30.com",
+    "uid": "HXWvrXfelNYrdCJepY9dJIj3SOH3"
   },
   "tutorial3": {
-    "title": "Wes Bos - Javascript 30",
-    "url": "http://javascript30.com"
+    "title": "Wes Bos 3 - Javascript 30",
+    "url": "http://javascript30.com",
+    "uid": "12345"
   },
   "tutorial4": {
-    "title": "Wes Bos - Javascript 30",
-    "url": "http://javascript30.com"
+    "title": "Wes Bos 4 - Javascript 30",
+    "url": "http://javascript30.com",
+    "uid": "12345"
   },
   "tutorial5": {
-    "title": "Wes Bos - Javascript 30",
-    "url": "http://javascript30.com"
+    "title": "Wes Bos 5 - Javascript 30",
+    "url": "http://javascript30.com",
+    "uid": "HXWvrXfelNYrdCJepY9dJIj3SOH3"
   }
 }

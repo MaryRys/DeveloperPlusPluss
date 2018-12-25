@@ -8,6 +8,8 @@ import Auth from '../components/Auth/Auth';
 import Tutorials from '../components/Tutorials/Tutorials';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 
+import tutorialsRequests from '../helpers/data/tutorialsRequests';
+
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 
@@ -15,11 +17,17 @@ class App extends Component {
   state = {
     authed: false,
     github_username: '',
+    tutorials: [],
   }
 
 
   componentDidMount() {
     connection();
+    tutorialsRequests.getRequest()
+      .then((tutorials) => {
+        this.setState({ tutorials });
+      })
+      .catch(err => console.error('error with tutorials GET', err));
 
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -60,7 +68,7 @@ class App extends Component {
     return (
       <div className="App">
       <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
-      <Tutorials />
+      <Tutorials tutorials={this.state.tutorials}/>
       </div>
     );
   }
