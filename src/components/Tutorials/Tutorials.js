@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import tutorialsShape from '../../helpers/propz/tutorialsShape';
+import tutorialShape from '../../helpers/propz/tutorialsShape';
 
 import TutorialsItem from '../TutorialsItem/TutorialsItem';
 import './Tutorials.scss';
 
 class Tutorials extends React.Component {
   static propTypes = {
-    tutorials: PropTypes.arrayOf(tutorialsShape),
+    tutorials: PropTypes.arrayOf(tutorialShape),
   }
 
   render() {
@@ -20,9 +20,9 @@ class Tutorials extends React.Component {
       />
     ));
     return (
-      <div className="Tutorials">
+      <div className="tutorials col">
         <h2>Tutorials</h2>
-        <div>{tutorialsItemComponents}</div>
+        <ul>{tutorialsItemComponents}</ul>
       </div>
     );
   }
