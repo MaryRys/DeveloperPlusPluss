@@ -11,12 +11,12 @@ class Tutorials extends React.Component {
   }
 
   render() {
-    const { tutorials } = this.props;
-    // console.log(tutorials);
+    const { tutorials, deleteSingleTutorial } = this.props;
     const tutorialsItemComponents = tutorials.map(tutorial => (
       <TutorialsItem
       tutorial={tutorial}
       key={tutorial.id}
+      deleteSingleTutorial={deleteSingleTutorial}
       />
     ));
     return (

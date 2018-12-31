@@ -50,6 +50,17 @@ class App extends Component {
     this.setState({ authed: true, github_username: username });
   };
 
+  deleteOne = (tutorialId) => {
+    tutorialsRequests.deleteTutorial(tutorialId)
+      .then(() => {
+        tutorialsRequests.getRequest()
+          .then((tutorials) => {
+            this.setState({ tutorials });
+          });
+      })
+      .catch(err => console.error('error with deleting single tutorials', err));
+  };
+
   render() {
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -68,7 +79,9 @@ class App extends Component {
     return (
       <div className="App">
       <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
-      <Tutorials tutorials={this.state.tutorials}/>
+      <Tutorials tutorials={this.state.tutorials}
+      deleteSingleTutorial={this.deleteOne}
+      />
       </div>
     );
   }

@@ -19,6 +19,9 @@ const getRequest = () => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
+const deleteTutorial = tutorialId => axios.delete(`${firebaseUrl}/tutorials/${tutorialId}.json`);
+
 export default {
   getRequest,
+  deleteTutorial,
 };

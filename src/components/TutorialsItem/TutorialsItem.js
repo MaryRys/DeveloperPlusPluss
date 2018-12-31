@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import tutorialShape from '../../helpers/propz/tutorialsShape';
 
@@ -8,6 +9,13 @@ import authRequests from '../../helpers/data/authRequests';
 class TutorialsItem extends React.Component {
   static propTypes = {
     tutorial: tutorialShape,
+    deleteSingleTutorial: PropTypes.func,
+  }
+
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { deleteSingleTutorial, tutorial } = this.props;
+    deleteSingleTutorial(tutorial.id);
   }
 
   render() {
@@ -19,7 +27,7 @@ class TutorialsItem extends React.Component {
             <div>
               <span className="col">
                 <button className="btn btn-danger">
-                  <i className="far fa-trash-alt"></i>
+                  <i className="far fa-trash-alt" onClick={this.deleteEvent}></i>
                 </button>
               </span>
             </div>
