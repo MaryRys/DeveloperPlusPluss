@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TutorialsForm.scss';
+import authRequests from '../../helpers/data/authRequests';
 
 const defaultTutotial = {
   title: '',
@@ -8,6 +10,10 @@ const defaultTutotial = {
 };
 
 class TutorialsForm extends React.Component {
+  static propTypes = {
+    onSubmit: PropTypes.func,
+  }
+
   state ={
     newTutorial: defaultTutotial,
   }
@@ -21,12 +27,21 @@ class TutorialsForm extends React.Component {
 
   titleChange = e => this.formFieldStringState('title', e);
 
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { onSubmit } = this.props;
+    const myTutorial = { ...this.state.newTutorial };
+    myTutorial.uid = authRequests.getCurrentUid();
+    onSubmit(myTutorial);
+    this.setState({ newTutorial: defaultTutotial });
+  }
+
   render() {
     const { newTutorial } = this.state;
     return (
       <div className="tutorials-form col">
         <h2>Add New Tutorial:</h2>
-        <form>
+        <form onSubmit={this.formSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title:</label>
             <input

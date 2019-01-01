@@ -62,6 +62,17 @@ class App extends Component {
       .catch(err => console.error('error with deleting single tutorials', err));
   };
 
+  formSubmitEvent = (newTutorial) => {
+    tutorialsRequests.postRequest(newTutorial)
+      .then(() => {
+        tutorialsRequests.getRequest()
+          .then((tutorials) => {
+            this.setState({ tutorials });
+          });
+      })
+      .catch(err => console.error('error with tutorials POST', err));
+  }
+
   render() {
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -83,7 +94,7 @@ class App extends Component {
         <Tutorials tutorials={this.state.tutorials}
         deleteSingleTutorial={this.deleteOne}
         />
-        <TutorialsForm />
+        <TutorialsForm onSubmit={this.formSubmitEvent} />
       </div>
     );
   }
