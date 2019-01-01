@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
 import Tutorials from '../components/Tutorials/Tutorials';
+import TutorialsForm from '../components/TutorialsForm/TutorialsForm';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
@@ -61,6 +62,17 @@ class App extends Component {
       .catch(err => console.error('error with deleting single tutorials', err));
   };
 
+  formSubmitEvent = (newTutorial) => {
+    tutorialsRequests.postRequest(newTutorial)
+      .then(() => {
+        tutorialsRequests.getRequest()
+          .then((tutorials) => {
+            this.setState({ tutorials });
+          });
+      })
+      .catch(err => console.error('error with tutorials POST', err));
+  }
+
   render() {
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -78,10 +90,11 @@ class App extends Component {
 
     return (
       <div className="App">
-      <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
-      <Tutorials tutorials={this.state.tutorials}
-      deleteSingleTutorial={this.deleteOne}
-      />
+        <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
+        <Tutorials tutorials={this.state.tutorials}
+        deleteSingleTutorial={this.deleteOne}
+        />
+        <TutorialsForm onSubmit={this.formSubmitEvent} />
       </div>
     );
   }
