@@ -23,8 +23,11 @@ const deleteTutorial = tutorialId => axios.delete(`${firebaseUrl}/tutorials/${tu
 
 const postRequest = tutorial => axios.post(`${firebaseUrl}/tutorials.json`, tutorial);
 
+const getSingleTutorial = tutorialId => axios.get(`${firebaseUrl}/tutorials/${tutorialId}.json`);
+
 export default {
   getRequest,
   deleteTutorial,
   postRequest,
+  getSingleTutorial,
 };

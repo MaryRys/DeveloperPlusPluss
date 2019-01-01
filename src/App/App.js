@@ -19,6 +19,8 @@ class App extends Component {
     authed: false,
     github_username: '',
     tutorials: [],
+    isEditing: false,
+    editId: '-1',
   }
 
 
@@ -73,16 +75,25 @@ class App extends Component {
       .catch(err => console.error('error with tutorials POST', err));
   }
 
+  passTutorialToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
+
   render() {
+    const {
+      authed,
+      tutorials,
+      isEditing,
+      editId,
+    } = this.state;
+
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({ authed: false, github_username: '' });
     };
 
-    if (!this.state.authed) {
+    if (!authed) {
       return (
           <div className="App">
-          <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
+          <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
           <Auth isAuthenticated={this.isAuthenticated}/>
           </div>
       );
@@ -90,11 +101,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent} />
-        <Tutorials tutorials={this.state.tutorials}
+        <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
+        <Tutorials tutorials={tutorials}
         deleteSingleTutorial={this.deleteOne}
+        passTutorialToEdit={this.passTutorialToEdit}
         />
-        <TutorialsForm onSubmit={this.formSubmitEvent} />
+        <TutorialsForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId} />
       </div>
     );
   }
