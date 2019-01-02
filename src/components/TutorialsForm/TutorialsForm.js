@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TutorialsForm.scss';
 import authRequests from '../../helpers/data/authRequests';
+import tutorialsRequsts from '../../helpers/data/tutorialsRequests';
 
 const defaultTutotial = {
   title: '',
@@ -12,6 +13,8 @@ const defaultTutotial = {
 class TutorialsForm extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func,
+    isEditing: PropTypes.bool,
+    editId: PropTypes.string,
   }
 
   state ={
@@ -36,11 +39,30 @@ class TutorialsForm extends React.Component {
     this.setState({ newTutorial: defaultTutotial });
   }
 
+  componentDidUpdate(prevProps) {
+    const { isEditing, editId } = this.props;
+    if (prevProps !== this.props && isEditing) {
+      tutorialsRequsts.getSingleTutorial(editId)
+        .then((tutorial) => {
+          this.setState({ newTutorial: tutorial.data });
+        })
+        .catch(err => console.error('error in getSingleTutorial', err));
+    }
+  }
+
   render() {
     const { newTutorial } = this.state;
+    const { isEditing } = this.props;
+    const title = () => {
+      if (isEditing) {
+        return <h2>Edit Tutorial:</h2>;
+      }
+      return <h2>Add New Tutorial:</h2>;
+    };
+
     return (
       <div className="tutorials-form col">
-        <h2>Add New Tutorial:</h2>
+      {title()}
         <form onSubmit={this.formSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title:</label>

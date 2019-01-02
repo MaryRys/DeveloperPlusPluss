@@ -10,6 +10,7 @@ class TutorialsItem extends React.Component {
   static propTypes = {
     tutorial: tutorialShape,
     deleteSingleTutorial: PropTypes.func,
+    passTutorialtoEdit: PropTypes.func,
   }
 
   deleteEvent = (e) => {
@@ -18,18 +19,30 @@ class TutorialsItem extends React.Component {
     deleteSingleTutorial(tutorial.id);
   }
 
+  editEvent = (e) => {
+    e.preventDefault();
+    const { passTutorialToEdit, tutorial } = this.props;
+    passTutorialToEdit(tutorial.id);
+  }
+
   render() {
     const { tutorial } = this.props;
     const uid = authRequests.getCurrentUid();
     const makeButtons = () => {
       if (tutorial.uid === uid) {
         return (
-            <div>
+            <div className="buttons">
+              <span className="col">
+                <button className="btn btn-info">
+                 <i className="far fa-edit" onClick={this.editEvent}></i>
+                </button>
+              </span>
               <span className="col">
                 <button className="btn btn-danger">
                   <i className="far fa-trash-alt" onClick={this.deleteEvent}></i>
                 </button>
               </span>
+                  <input type="checkbox" aria-label="Checkbox for following text input" />
             </div>
         );
       }
@@ -37,9 +50,9 @@ class TutorialsItem extends React.Component {
     };
     return (
       <li className="tutorials-item text-center">
-        <span className="col-6">{tutorial.title}</span>
-        <span className="col-6">{tutorial.url}</span>
-        {makeButtons()}
+        <span className="col-5">{tutorial.title}</span>
+        <span className="col-5">{tutorial.url}</span>
+        <span className="col-2">{makeButtons()}</span>
       </li>
     );
   }
