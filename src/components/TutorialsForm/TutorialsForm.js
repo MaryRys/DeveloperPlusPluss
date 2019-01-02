@@ -52,9 +52,17 @@ class TutorialsForm extends React.Component {
 
   render() {
     const { newTutorial } = this.state;
+    const { isEditing } = this.props;
+    const title = () => {
+      if (isEditing) {
+        return <h2>Edit Tutorial:</h2>;
+      }
+      return <h2>Add New Tutorial:</h2>;
+    };
+
     return (
       <div className="tutorials-form col">
-        <h2>Add New Tutorial:</h2>
+      {title()}
         <form onSubmit={this.formSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title:</label>

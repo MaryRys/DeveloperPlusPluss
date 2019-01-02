@@ -25,9 +25,12 @@ const postRequest = tutorial => axios.post(`${firebaseUrl}/tutorials.json`, tuto
 
 const getSingleTutorial = tutorialId => axios.get(`${firebaseUrl}/tutorials/${tutorialId}.json`);
 
+const putRequest = (tutorialId, tutorial) => axios.put(`${firebaseUrl}/tutorials/${tutorialId}.json`, tutorial);
+
 export default {
   getRequest,
   deleteTutorial,
   postRequest,
   getSingleTutorial,
+  putRequest,
 };

@@ -65,14 +65,26 @@ class App extends Component {
   };
 
   formSubmitEvent = (newTutorial) => {
-    tutorialsRequests.postRequest(newTutorial)
-      .then(() => {
-        tutorialsRequests.getRequest()
-          .then((tutorials) => {
-            this.setState({ tutorials });
-          });
-      })
-      .catch(err => console.error('error with tutorials POST', err));
+    const { isEditing, editId } = this.state;
+    if (isEditing) {
+      tutorialsRequests.putRequest(editId, newTutorial)
+        .then(() => {
+          tutorialsRequests.getRequest()
+            .then((tutorials) => {
+              this.setState({ tutorials, isEditing: false, editId: '-1' });
+            });
+        })
+        .catch(err => console.error('error with tutorials post', err));
+    } else {
+      tutorialsRequests.postRequest(newTutorial)
+        .then(() => {
+          tutorialsRequests.getRequest()
+            .then((tutorials) => {
+              this.setState({ tutorials });
+            });
+        })
+        .catch(err => console.error('error with tutorials POST', err));
+    }
   }
 
   passTutorialToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
