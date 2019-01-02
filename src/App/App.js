@@ -7,6 +7,7 @@ import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
 import Tutorials from '../components/Tutorials/Tutorials';
 import TutorialsForm from '../components/TutorialsForm/TutorialsForm';
+import UserProfile from '../components/UserProfile/UserProfile';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
@@ -114,11 +115,18 @@ class App extends Component {
     return (
       <div className="App">
         <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
-        <Tutorials tutorials={tutorials}
-        deleteSingleTutorial={this.deleteOne}
-        passTutorialToEdit={this.passTutorialToEdit}
-        />
-        <TutorialsForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId} />
+        <div className="row">
+          <div className="userProfile col-3">
+            <UserProfile />
+          </div>
+          <div className="dashboard col-8">
+          <TutorialsForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId} />
+            <Tutorials tutorials={tutorials}
+            deleteSingleTutorial={this.deleteOne}
+            passTutorialToEdit={this.passTutorialToEdit}
+            />
+          </div>
+        </div>
       </div>
     );
   }

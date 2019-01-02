@@ -50,9 +50,9 @@ class TutorialsItem extends React.Component {
     };
     return (
       <li className="tutorials-item text-center">
-        <span className="col-5">{tutorial.title}</span>
-        <span className="col-5">{tutorial.url}</span>
-        <span className="col-2">{makeButtons()}</span>
+        <span className="col-4">{tutorial.title}</span>
+        <span className="col-4">{tutorial.url}</span>
+        <span className="col-4">{makeButtons()}</span>
       </li>
     );
   }
