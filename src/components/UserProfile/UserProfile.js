@@ -1,19 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './UserProfile.scss';
 
 class UserProfile extends React.Component {
-  render() {
-    return (
+static propTypes ={
+  profile: PropTypes.object,
+}
+
+render() {
+  const { profile } = this.props;
+  return (
       <div className="userProfile col text-center">
-        <h2>User</h2>
-        <img src="https://i.imgur.com/3QZpu6w.jpg" alt="userImage"></img>
-        <h4>Username</h4>
-        <p>This is my bio</p>
-        <p>www.github.com</p>
+        <h2>{profile.name}</h2>
+        <img src={profile.avatar_url} alt="userImage" width="200px"></img>
+        <h4>{profile.login}</h4>
+        <p>{profile.bio}</p>
+        <p>{profile.html_url}</p>
+        <p># Commits Since...</p>
       </div>
-    );
-  }
+  );
+}
 }
 
 export default UserProfile;

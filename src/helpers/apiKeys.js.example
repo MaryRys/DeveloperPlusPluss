@@ -7,4 +7,8 @@ const apiKeys = {
     storageBucket: '',
     messagingSenderId: '',
   },
+  gitHubKeys: {
+    clientId: '',
+    clientSecret: '',
+  },
 };
